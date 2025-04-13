@@ -1,0 +1,17 @@
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <!-- Уровень логирования для Netty и Lettuce -->
+    <logger name="io.netty" level="INFO" />
+    <logger name="io.lettuce" level="INFO" />
+    <!-- Уровень логирования для вашего приложения -->
+    <logger name="service" level="DEBUG" />
+    <logger name="messaging" level="DEBUG" />
+    <logger name="api" level="INFO" />
+    <root level="INFO">
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>
