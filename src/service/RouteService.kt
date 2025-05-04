@@ -3,12 +3,11 @@ package service
 import domain.*
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import messaging.MessagePublisher
 import org.slf4j.LoggerFactory
+import messaging.KeyDBClient
 
 class RouteService {
     private val logger = LoggerFactory.getLogger(RouteService::class.java)
-    private val messagePublisher = MessagePublisher()
 
     // Временное хранилище для MVP
     private val routes = mutableMapOf<String, Route>()
@@ -51,6 +50,7 @@ class RouteService {
         userId: String,
         startPoint: Point,
         caloriesBurn: Int,
+        keydb: KeyDBClient
     ): Route {
         // Создаем простой маршрут (в реальности здесь была бы интеграция с OSM)
         val route =
@@ -86,7 +86,7 @@ class RouteService {
         routes[route.id] = route
 
         // Публикуем событие
-        messagePublisher.publishEvent(
+        keydb.pub(
             "events:route-generated",
             """
             {

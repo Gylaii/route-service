@@ -12,8 +12,6 @@ group = "com.gulaii"
 
 version = "0.1.0"
 
-repositories { mavenCentral() }
-
 dependencies {
     // Ktor server
     implementation("io.ktor:ktor-server-core:2.0.1")
@@ -34,6 +32,13 @@ dependencies {
     implementation("org.postgresql:postgresql:42.3.6")
     implementation("org.jetbrains.exposed:exposed-core:0.38.2")
     implementation("org.jetbrains.exposed:exposed-jdbc:0.38.2")
+
+    implementation("com.github.Gylaii:keydb-client-lib:v0.1.1")
+}
+
+repositories {
+    mavenCentral()
+    maven { url = uri("https://jitpack.io") }
 }
 
 detekt {
